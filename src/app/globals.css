@@ -1,0 +1,122 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------
+   SmartPark design tokens
+   Palette carried over from the ESP32 companion app for brand
+   continuity: signal yellow + deep ink black, with a warm paper
+   text color instead of pure white.
+------------------------------------------------------------------ */
+:root {
+  --ink-950: #0a0a0a;   /* page background */
+  --ink-900: #131416;   /* raised cards */
+  --ink-850: #191b1e;   /* nested surfaces */
+  --ink-800: #232629;   /* borders / dividers */
+  --ink-700: #34383c;   /* hover borders */
+
+  --paper: #f6f4ec;     /* primary text on dark */
+  --paper-dim: #a2a099; /* secondary text on dark */
+  --paper-faint: #6b6a65; /* tertiary / disabled text */
+
+  --signal-yellow: #f7e733;
+  --signal-yellow-dim: #c9ba1f;
+  --signal-yellow-ink: #14140a; /* text on yellow */
+
+  --free-green: #3fa857;
+  --free-green-soft: #16301f;
+  --occupied-red: #ff5f57;
+  --occupied-red-soft: #3a1417;
+  --unmonitored: #55585c;
+
+  --font-display: "Big Shoulders Display", "Arial Narrow", sans-serif;
+  --font-body: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace;
+}
+
+@theme inline {
+  --color-ink-950: var(--ink-950);
+  --color-ink-900: var(--ink-900);
+  --color-ink-850: var(--ink-850);
+  --color-ink-800: var(--ink-800);
+  --color-ink-700: var(--ink-700);
+
+  --color-paper: var(--paper);
+  --color-paper-dim: var(--paper-dim);
+  --color-paper-faint: var(--paper-faint);
+
+  --color-signal-yellow: var(--signal-yellow);
+  --color-signal-yellow-dim: var(--signal-yellow-dim);
+  --color-signal-yellow-ink: var(--signal-yellow-ink);
+
+  --color-free-green: var(--free-green);
+  --color-free-green-soft: var(--free-green-soft);
+  --color-occupied-red: var(--occupied-red);
+  --color-occupied-red-soft: var(--occupied-red-soft);
+  --color-unmonitored: var(--unmonitored);
+
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+  --font-mono: var(--font-mono);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  background: var(--ink-950);
+  color: var(--paper);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Hazard stripe motif — echoes the entry-ramp flooring in the physical
+   lot diagram. Used sparingly as a structural accent, never as filler. */
+.hazard-stripes {
+  background-image: repeating-linear-gradient(
+    135deg,
+    var(--signal-yellow) 0px,
+    var(--signal-yellow) 10px,
+    var(--ink-950) 10px,
+    var(--ink-950) 20px
+  );
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .pulse-ring {
+    animation: pulse-ring 2.2s ease-out infinite;
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    opacity: 0.55;
+    transform: scale(0.9);
+  }
+  70% {
+    opacity: 0;
+    transform: scale(1.8);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.8);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+:focus-visible {
+  outline: 2px solid var(--signal-yellow);
+  outline-offset: 2px;
+}

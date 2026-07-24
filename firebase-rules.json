@@ -1,0 +1,17 @@
+{
+  "rules": {
+    "parkingLot": {
+      ".read": true,
+      ".write": false
+    },
+    "events": {
+      ".read": true,
+      ".write": false,
+      ".indexOn": [".value"]
+    },
+    "$other": {
+      ".read": false,
+      ".write": false
+    }
+  }
+}
